@@ -45,6 +45,7 @@ struct BackupWorkspace {
 	float fov = 0.f;
 	std::string home_planet_name;
 	std::string pos_name;
+	std::string landscape_name;
 };
 
 class Core;
