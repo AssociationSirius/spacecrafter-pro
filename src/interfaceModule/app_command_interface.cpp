@@ -3215,23 +3215,27 @@ int AppCommandInterface::commandBody()
 }
 
 
+void AppCommandInterface::setFont(const std::string argName, void (Core::*funSetFont)(int, const std::string) ) {
+	FilePath fontFile  = FilePath(args[argName], FilePath::TFP::FONTS);
+
+	if (fontFile) {
+		int size = 10;
+		if (args["size"] != "") size = evalInt(args["size"]);
+		(stcore->*funSetFont)(size, fontFile.toString());
+	} else {
+		debug_message= "command 'font' :" + argName + " font not found";
+		cLog::get()->write( debug_message,LOG_TYPE::L_DEBUG, LOG_FILE::SCRIPT );
+	}
+}
+
 int AppCommandInterface::commandFont()
 {
-	if (!args[W_FILENAME].empty()) {
-		FilePath myFile  = FilePath(args[W_FILENAME], FilePath::TFP::FONTS);
-			if (myFile) {
-				int size = 10;
-				if (!args[W_SIZE].empty())
-					size = evalInt(args[W_SIZE]);
-				stcore->loadFont(size, myFile.toString());
-				return executeCommandStatus();
-			} else {
-				debug_message= "command 'font' : filename can't be found";
-				cLog::get()->write( debug_message,LOG_TYPE::L_DEBUG, LOG_FILE::SCRIPT );
-				return executeCommandStatus();
-			}
-	}
-	debug_message = _("Command 'font': unknown argument");
+	if (args[W_ALL] != "") setFont(W_ALL, &Core::loadFont);
+	else if (args[ACP_CN_TEXT] != "") setFont(ACP_CN_TEXT, &Core::setFontText);
+	else if (args[W_PLANET] != "") setFont(W_PLANET, &Core::setFontPlanets);
+	else if (args[W_CONSTELLATION] != "") setFont(W_CONSTELLATION, &Core::setFontConstellations);
+	else if (args[ACP_FN_CARDINAL_POINTS] != "") setFont(ACP_FN_CARDINAL_POINTS, &Core::setFontCardinalPoints);
+	else if (args[ACP_FN_STARS] != "") setFont(ACP_FN_STARS, &Core::setFontStars);
 	return executeCommandStatus();
 }
 

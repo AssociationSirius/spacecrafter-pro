@@ -451,6 +451,26 @@ public:
 	//! Load font scheme from ini file
 	void setFontScheme(void);
 
+	void setFontText(int size, const std::string name) {
+		text_usr->setFont(size, name);
+	}
+
+	void setFontPlanets(int size, const std::string name) {
+		ssystem->setFont(size, name);
+	}
+
+	void setFontStars(int size, const std::string name) {
+		hip_stars->setFont(size, name);
+	}
+
+	void setFontConstellations(int size, const std::string name) {
+		asterisms->setFont(size, name);
+	}
+
+	void setFontCardinalPoints(int size, const std::string name) {
+		cardinals_points->setFont(size, name);
+	}
+
 	void loadFont(int baseSize, const std::string name);
 
 

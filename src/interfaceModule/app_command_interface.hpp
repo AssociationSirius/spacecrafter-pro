@@ -155,6 +155,7 @@ private:
 
 	bool setFlag(FLAG_NAMES flagName, FLAG_VALUES flag_value, bool &newval);
 	bool setFlag(const std::string &name, const std::string &value, bool &newval);
+	void setFont(const std::string argName, void (Core::*funSetFont)(int, const std::string) );
 
 	double evalDouble(const std::string &var);
 	int evalInt (const std::string &var);
