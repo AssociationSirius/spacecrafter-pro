@@ -36,7 +36,8 @@ smooth out vec2 TexCoord;
 
 void main()
 {
-	vec3 Position = vec3(position, 0);
+	vec3 Position3D = vec3(position, 0);
+	vec3 Position = vec3(ModelViewMatrix * vec4(position,0.0,1.0));
 	TexCoord = texCoord;
 	PlanetHalfAngle = atan(PlanetRadius/distance(PlanetPosition, Position));
 	Separation = dot(LightDirection, normalize(PlanetPosition-Position));
@@ -46,5 +47,5 @@ void main()
 
 	NdotL = clamp(16.0*dot(vec3(0.0, 0.0, 1.0-2.0*SunnySideUp), modelLight), -1.0, 1.0);
 
-	gl_Position = fisheyeProject( Position*RingScale, clipping_fov);
+	gl_Position = fisheyeProject( Position3D*RingScale, clipping_fov);
 }
