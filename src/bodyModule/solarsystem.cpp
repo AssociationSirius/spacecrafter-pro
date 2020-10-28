@@ -513,10 +513,6 @@ void SolarSystem::addBody(stringHash_t & param, bool deletable)
 		default:
 			cLog::get()->write("Undefined body", LOG_TYPE::L_ERROR);
 	}
-	if (p == nullptr) {
-		cLog::get()->write("Failed to create body", LOG_TYPE::L_ERROR);
-		return;
-	}
 
 	if (!param["has_atmosphere"].empty()) {
 		AtmosphereParams* tmp = nullptr;
