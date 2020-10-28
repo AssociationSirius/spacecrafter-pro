@@ -49,7 +49,6 @@
 #include "eventModule/CoreEvent.hpp"
 #include "eventModule/event_recorder.hpp"
 #include "renderGL/Renderer.hpp"
-#include "coreModule/StarGalaxy.hpp"
 
 
 Core::Core( int width, int height, Media* _media, const mBoost::callback<void, std::string>& recordCallback) :
@@ -1096,11 +1095,6 @@ bool Core::selectObject(const std::string &type, const std::string &id)
 		ssystem->setSelected(""); //setPlanetsSelected("");
 		asterisms->setSelected(Object());
 
-	} else if (type=="star_galaxy") {
-		selected_object = starGalaxy;
-		ssystem->setSelected(""); //setPlanetsSelected("");
-		asterisms->setSelected(Object());
-
 	} else if (type=="constellation") {
 
 		// Select only constellation, nothing else
@@ -1189,26 +1183,6 @@ void Core::deselect(void)
 	unSelect();
 	asterisms->deselect();
 	hip_stars->deselect();
-}
-
-void Core::starGalaxyCreate(std::string argName)
-{
-	std::cout << "stargalaxy: " << argName << std::endl;
-    unsigned int result = Utility::strToInt(argName);
-	std::cout << "stargalaxy: " << result << std::endl;
-	starGalaxy = new StarGalaxy(starNav->getStarInfo(result));
-	Vec3d pos = starGalaxy->getObsJ2000Pos(navigation);
-	stringHash_t params;
-	params["name"] = argName;
-	params["type"]= "observatory";
-	params["x"]= std::to_string(pos[0]);
-	params["y"]= std::to_string(pos[1]);
-	params["z"]= std::to_string(pos[2]);
-	bool s = anchorManager->addAnchor(params);
-	if (s)
-		std::cout << "Insertion anchor oki" << std::endl;
-	else
-		std::cout << "Insertion anchor error" << std::endl;
 }
 
 // - allow selection of large nearby planets more easily and do not select hidden planets
