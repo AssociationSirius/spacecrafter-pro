@@ -286,7 +286,7 @@ public:
 	static Matrix4<T> getViewFromLookAt(const Matrix4<T>&m);
 	static Matrix4<T> yawPitchRoll(T const& ,T const& ,T const& );
 	static Matrix4<T> translation(const Vector3<T>&);
-	static Matrix4<T> getLookAtBeforeView(const Matrix4<T> &viewRotation, const Vector3<T> &pos);
+	static Matrix4<T> getViewBeforeLookAt(const Matrix4<T> &viewRotation, const Vector3<T> &pos);
 
 	static const Matrix4<T> rotation(const Vector3<T>&a,const Vector3<T>&b);
 	static const Matrix4<T> rotation(const Vector3<T>&, T);
@@ -2204,7 +2204,7 @@ template<class T> Matrix4<T> Matrix4<T>::fastInverse() const
 	                    r[12], r[13], r[14], r[15]);
 }
 
-template<class T> Matrix4<T> Matrix4<T>::getLookAtBeforeView(const Matrix4<T> &viewRotation, const Vector3<T> &pos)
+template<class T> Matrix4<T> Matrix4<T>::getViewBeforeLookAt(const Matrix4<T> &viewRotation, const Vector3<T> &pos)
 {
 	return Matrix4<T>(-viewRotation.r[2], -viewRotation.r[6], -viewRotation.r[10], 0,
 					  viewRotation.r[0], viewRotation.r[4], viewRotation.r[8], 0,
