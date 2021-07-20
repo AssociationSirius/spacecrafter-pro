@@ -73,6 +73,7 @@ Core::Core( int width, int height, Media* _media, const mBoost::callback<void, s
 	tone_converter = new ToneReproductor();
 	atmosphere = new Atmosphere();
 	ssystem = new SolarSystem();
+	ssystemTmp = new SSystemFactory();
 	timeMgr = new TimeMgr();
 	observatory = new Observer(/**ssystem*/);
 	navigation = new Navigator();
@@ -206,6 +207,7 @@ Core::~Core()
 	delete tone_converter;
 	// s_font::deleteShader();
 	delete ssystem;
+	delete ssystemTmp;
 	delete skyloc;
 	skyloc = nullptr;
 	Object::deleteTextures(); // Unload the pointer textures
