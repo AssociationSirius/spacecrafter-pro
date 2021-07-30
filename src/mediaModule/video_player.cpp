@@ -237,7 +237,7 @@ void VideoPlayer::getNextFrame()
 
 		if(av_read_frame(pFormatCtx, packet)<0) {
 			cLog::get()->write("fin de fichier");
-			m_isVideoSeeking = true;
+			isSeeking = true;
 			media->playerStop();
 			return;
 		}
@@ -301,6 +301,12 @@ void VideoPlayer::stopCurrentVideo()
 	for (int i = 0; i < 3; ++i) {
 		videoTexture.tex[i]->releaseStagingMemoryPtr();
 	}
+
+	Event* event = new VideoEvent(VIDEO_ORDER::STOP);
+	EventRecorder::getInstance()->queue(event);
+	media->playerStop();
+#endif
+}
 
 	Event* event = new VideoEvent(VIDEO_ORDER::STOP);
 	EventRecorder::getInstance()->queue(event);

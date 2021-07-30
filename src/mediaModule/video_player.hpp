@@ -59,7 +59,8 @@ class ThreadContext;
  */
 class VideoPlayer {
 public:
-	//! Constructeur: initialise les états de la ffmpeg
+	//! \fn VideoPlayer
+	//! \brief Constructeur: initialise les états de la ffmpeg
 	VideoPlayer(Media* _media);
 
 	//! Destructeur, ferme les états de la ffmpeg
@@ -112,6 +113,12 @@ private:
 	bool seekVideo(int64_t frameToSkeep, float &reallyDeltaTime);
 	//! initialise une texture à la taille de la vidéo
 	void initTexture();
+	 //! texture représentant la frame actuelle
+
+	Media* media=nullptr;
+	GLuint RGBtexture;
+	YUV_WRAPPER YUV_Texture;
+	GLuint YUVtexture[3];
 
 	Media* media=nullptr;
 	VideoTexture videoTexture;	//!< renvoie les indices des textures pour les classes nécessitant

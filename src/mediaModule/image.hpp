@@ -115,6 +115,14 @@ private:
 	//pour distinguer quelle texture ont doit utiliser:
 	// bool useRGB;
 
+	typedef struct {
+		bool onTransition = false;	// Is on transition
+		int timer;		// Elapsed time from the beginning of the transition
+		int duration;	// Transition duration
+		float start;	// Initial position
+		float end;		// Final position
+		float coef;		// defined as start + coef * duration == end
+	} linearTransition;
 	std::string image_name;
 	IMG_POSITION image_pos_type;
 	bool isPersistent= false;
@@ -122,17 +130,19 @@ private:
 	float image_scale, image_alpha, image_rotation;
 	float image_ratio, image_xpos, image_ypos;
 
-	bool flag_alpha, flag_scale, flag_rotation, flag_location, flag_progressive_x=0, flag_progressive_y=0, flag_ratio=0;
-	float coef_alpha, coef_scale, coef_rotation, coef_ratio;
+	bool flag_alpha, flag_scale, flag_rotation, flag_location, flag_progressive_x=0, flag_progressive_y=0;
+	float coef_alpha, coef_scale, coef_rotation;
 	float mult_alpha, mult_scale, mult_rotation;
-	float start_alpha, start_scale, start_rotation, start_ratio;
-	float end_alpha, end_scale, end_rotation, end_ratio;
+	float start_alpha, start_scale, start_rotation;
+	float end_alpha, end_scale, end_rotation;
 
 	int mid_time_x, mid_time_y, my_timer, my_timer_ratio, end_time, end_time_ratio;
 
 	float coef_location, mult_location, x_move, y_move;
 	double coef_xmove, coef_ymove;
 	float start_xpos, start_ypos, end_xpos, end_ypos;
+
+	linearTransition ratio;
 
 	//OpenGL vars
 	std::vector<float> vecImgPos, vecImgTex, vecImgData;

@@ -223,7 +223,7 @@ void App::flag(APP_FLAG layerValue, bool _value) {
 				flagAlive = _value; break;
 		// case APP_FLAG::ON_VIDEO :
 		// 		flagOnVideo = _value; break;
-		case APP_FLAG::COLOR_INVERSE :
+		case APP_FLAG::COLOR_INVERSE : 
 				flagColorInverse = _value; break;
 		case APP_FLAG::ANTIALIAS :
 				appDraw->setFlagAntialiasLines(_value); break;
@@ -240,7 +240,7 @@ void App::toggle(APP_FLAG layerValue)
 				flagAlive = !flagAlive; break;
 		// case APP_FLAG::ON_VIDEO :
 		// 		flagOnVideo = !flagOnVideo; break;
-		case APP_FLAG::COLOR_INVERSE :
+		case APP_FLAG::COLOR_INVERSE : 
 				flagColorInverse = !flagColorInverse; break;
 		case APP_FLAG::ANTIALIAS :
 				appDraw->flipFlagAntialiasLines(); break;

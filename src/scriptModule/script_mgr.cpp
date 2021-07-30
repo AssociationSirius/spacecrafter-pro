@@ -262,14 +262,13 @@ void ScriptMgr::resetScriptLoop()
 // runs maximum of one command per update note that waits can drift by up to 1/fps seconds
 void ScriptMgr::update(int delta_time)
 {
-	if (sR.recording) sR.record_elapsed_time += delta_time;
-
-	/**	isVideoPlayed && waitOnVideo :
-	 * case of video is playing and scriptMgr should wait on it :
+	if (recording) record_elapsed_time += delta_time;
+	
+	/**	isVideoPlayed && waitOnVideo : 
+	 * case of video is playing and scriptMgr should wait on it : 
 	 * so next if must be false*/
-	if (scriptState==ScriptState::PLAY && (isVideoPlayed && waitOnVideo ? false : true) ) {
-
-    wait_time -= delta_time;
+	if (playing && !play_paused && (isVideoPlayed && waitOnVideo ? false : true) ) {
+		wait_time -= delta_time;
 		if (wait_time<0)
 			wait_time =0;
 
