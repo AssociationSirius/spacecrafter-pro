@@ -115,6 +115,9 @@ cLog::~cLog()
 
 void cLog::write(const std::string& texte, const LOG_TYPE& type, const LOG_FILE& fichier)
 {
+	if (!isDebug)
+		return;
+
 	writeMutex.lock();
 	std::string ligne;
 
