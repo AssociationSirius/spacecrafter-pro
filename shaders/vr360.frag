@@ -17,9 +17,9 @@ out vec4 FragColor;
  
 void main(void)
 {
-    highp float y = texture2D(s_texture_y, TexCoord).r-0.0625;  
-    highp float u = texture2D(s_texture_u, TexCoord).r - 0.5;  
-    highp float v = texture2D(s_texture_v, TexCoord).r - 0.5;  
+    highp float y = texture(s_texture_y, TexCoord).r-0.0625;  
+    highp float u = texture(s_texture_u, TexCoord).r - 0.5;  
+    highp float v = texture(s_texture_v, TexCoord).r - 0.5;  
     highp float r = y +             1.402 * v;  
     highp float g = y - 0.344 * u - 0.714 * v;  
     highp float b = y + 1.772 * u;  
